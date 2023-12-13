@@ -1,5 +1,6 @@
 const { sanitize } = require("isomorphic-dompurify");
 const { Application } = require('../models/Application');
+const {errorCheckInvalidFields} = require("../middleware/validator");
 const { validationResult } = require('express-validator');
 
 //gets a list of all the applications
@@ -54,16 +55,25 @@ const createApplication = async (req, res) => {
 const updateApplication = async (req, res) => {
     const { id } = req.params;
     try {
-      const name = sanitize(req.body?.name);
-      const thumbnail = sanitize(req.body?.thumbnail);
-      const description = sanitize(req.body?.description);
+      let name = sanitize(req.body?.name);
+      let thumbnail = sanitize(req.body?.thumbnail);
+      let description = sanitize(req.body?.description);
+      if (!name && !thumbnail && !description) {
+        return res.status(400).send({ message: 'Bad request; nothing to update' });
+      }
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array(), message: errors.array()[0].msg });
+        const errorIndex = errorCheckInvalidFields(errors);
+        if(errorIndex >= 0) return res.status(422).json({ errors: errors.array(), message: errors.array()[errorIndex].msg });
       }
 
       const application = await Application.findByPk(id);
       if(application === null) return res.status(404).send({ message: "Entry not found!" });
+
+      if(!thumbnail) thumbnail = application.thumbnail;
+      if(!name) name = application.name;
+      if(!description) description = application.description;
+
       application.set({
         name,
         thumbnail,

@@ -2,9 +2,9 @@
   "name": "experiences_launcher",
   "version": "1.0.0",
   "description": "backend launcher for several UE5 Projects",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "node src/index.js"
+    "test": "node src/app.js"
   },
   "author": "Juan Nicolás Nobza",
   "license": "ISC",

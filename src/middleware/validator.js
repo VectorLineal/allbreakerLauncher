@@ -19,7 +19,17 @@ async function hashPassword(plaintextPassword) {
     return result;
 }
 
+//It ignores the errors of all the null fields and returns the first index where the error was provoked by other validations
+const errorCheckInvalidFields = (errors) => {
+    const errorList = errors.array();
+    for(let i = 0; i < errorList.length; i++){
+      if(errorList[i].value != null) return i;
+    }
+    return -1;
+  }
+
  module.exports = {
     hashPassword,
-    comparePassword
+    comparePassword,
+    errorCheckInvalidFields
   };
