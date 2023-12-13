@@ -4,7 +4,7 @@
   "description": "backend launcher for several UE5 Projects",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node src/index.js"
   },
   "author": "Juan Nicolás Nobza",
   "license": "ISC",

@@ -20,7 +20,7 @@ const getApplication = async (req, res) => {
         if(application === null) return res.status(404).send({ message: "Entry not found!" });
         return res.status(200).send(application);
       } catch (error) {
-        return res.status(500).send({ error, message: "internal server error" });
+        return res.status(500).send({ error, message: "Internal server error." });
       }
 };
 
@@ -46,7 +46,7 @@ const createApplication = async (req, res) => {
         });
         return res.status(201).send({ application: save, message: "Application created successfuly" });
       } catch (error) {
-        return res.status(500).send({ error, message: "internal server error" });
+        return res.status(500).send({ error, message: "Internal server error." });
       }
 };
 
@@ -72,7 +72,7 @@ const updateApplication = async (req, res) => {
       await application.save();
       return res.status(200).send({application, message: "Application update successful"});
      } catch (error) {
-      return res.status(500).send({ error, message: "internal server error." });
+      return res.status(500).send({ error, message: "Internal server error." });
     }
 };
 
@@ -87,7 +87,7 @@ const deleteApplication = async (req, res) => {
           });
         return res.status(200).send({message: "Application with " + id + " was deleted successfuly!"});
       } catch (error) {
-        return res.status(500).send({ error, message: "internal server error" });
+        return res.status(500).send({ error, message: "Internal server error." });
       }
 };
 module.exports = {
