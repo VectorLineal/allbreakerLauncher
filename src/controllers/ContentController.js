@@ -30,7 +30,7 @@ const getContentByUser = async (req, res) => {
       if(contents === null) return res.status(404).send({ message: "Entry not found!" });
       return res.status(200).send(contents);
     } catch (error) {
-      return res.status(500).send({ error, message: "internal server error" });
+      return res.status(500).send({ error, message: "Internal server error." });
     }
 };
 
@@ -52,7 +52,7 @@ const createContent = async (req, res) => {
         });
         return res.status(201).send({ content: save, message: "Content created successfuly" });
       } catch (error) {
-        return res.status(500).send({ error, message: "internal server error" });
+        return res.status(500).send({ error, message: error.original.detail });
       }
 };
 

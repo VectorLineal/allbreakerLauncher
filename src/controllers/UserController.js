@@ -129,7 +129,7 @@ const updateUser = async (req, res) => {
         await user.save();
         return res.status(200).send(user);
       }catch(error){
-        return res.status(500).send({ error, message: "This Email is already registered." });
+        return res.status(400).send({ error, message: "This Email is already registered." });
       }
     } catch (error) {
       return res.status(500).send({ error, message: "Internal server error." });

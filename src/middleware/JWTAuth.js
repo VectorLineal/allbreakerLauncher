@@ -10,6 +10,6 @@ exports.validateAuth = async ({ req, res }, callback) => {
 		if (callback) await callback(req, res);
 	} catch (err) {
 		res.clearCookie("token");
-		res.status(403).send({ message: "Required authentication" });
+		res.status(401).send({ message: "Required authentication" });
 	}
 };
